@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->boolean('is_admin')->default(false)->comment('管理者フラグ');
             $table->rememberToken();
             $table->timestamps();
-            $table->dateTime('last_logged-in_at')->nullable()->default(null);
+            $table->dateTime('last_logged_in_at')->nullable()->default(null);
         });
     }
 
