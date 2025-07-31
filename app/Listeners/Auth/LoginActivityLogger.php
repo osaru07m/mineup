@@ -18,10 +18,10 @@ class LoginActivityLogger
         UserActivity::create([
             'user_id' => $user->id,
             'action' => 'login',
-            'context' => json_encode([
+            'context' => [
                 'user_agent' => Request::header('User-Agent'),
                 'url' => Request::fullUrl(),
-            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            ],
             'ip_address' => Request::ip(),
         ]);
     }
