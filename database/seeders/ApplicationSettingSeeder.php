@@ -12,8 +12,9 @@ class ApplicationSettingSeeder extends Seeder
      */
     public function run(): void
     {
+        /** @var array<string, string> */
         $defaultSettings = [
-            //TODO - 随時追加
+            'is_guest_registration_allowed' => '1',
         ];
 
         foreach ($defaultSettings as $name => $value) {

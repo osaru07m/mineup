@@ -23,5 +23,9 @@ class DatabaseSeeder extends Seeder
             'is_change_password_required' => true,
             'is_admin' => true
         ]);
+
+        $this->call([
+            ApplicationSettingSeeder::class,
+        ]);
     }
 }
