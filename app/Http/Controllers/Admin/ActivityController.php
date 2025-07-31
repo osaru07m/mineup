@@ -12,6 +12,6 @@ class ActivityController extends Controller
     {
         $activities = UserActivity::with('user')->orderBy('created_at', 'desc')->get();
 
-        return view('admin.activities.index', compact('activities'));
+        return view('admin.activities', compact('activities'));
     }
 }
