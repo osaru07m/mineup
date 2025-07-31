@@ -12,12 +12,20 @@ class AdminDashboardController extends Controller
 {
     public function index(): View
     {
-        $userCount = User::select('status', DB::raw('count(id) as count'))
+        $userCounts = [];
+        $userCountData = User::select('status', DB::raw('count(id) as count'))
             ->groupBy('status')
             ->pluck('count', 'status');
 
+        foreach (User::STATUS_LABELS as $status => $label) {
+            $userCounts[] = [
+                'label' => $label,
+                'count' => $userCountData[$status] ?? 0
+            ];
+        }
+
         $userActivities = UserActivity::with('user')->orderBy('created_at', 'desc')->limit(10)->get();
 
-        return view('admin.dashboard', compact('userCount', 'userActivities'));
+        return view('admin.dashboard', compact('userCounts', 'userActivities'));
     }
 }

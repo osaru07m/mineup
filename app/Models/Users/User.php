@@ -21,6 +21,18 @@ class User extends Authenticatable
     /** @var string ロック済みステータス */
     public const STATUS_LOCKED = 'locked';
 
+    public const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_PENDING,
+        self::STATUS_LOCKED
+    ];
+
+    public const STATUS_LABELS = [
+        self::STATUS_ACTIVE => 'アクティブ',
+        self::STATUS_PENDING => '承認待ち',
+        self::STATUS_LOCKED => 'ロック済み'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

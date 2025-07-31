@@ -22,7 +22,7 @@
                         @if (Auth::check())
                             @include('components.headers.auth')
                         @else
-                            @include('components.headers.guest')
+                            <x-headers.guest />
                         @endif
                     </div>
                 </div>

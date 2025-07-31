@@ -1,10 +1,5 @@
-<?php
-
-use App\Models\ApplicationSetting;
-
-?>
 <ul class="navbar-nav ms-auto">
-    @if ((bool) ApplicationSetting::get('is_guest_registration_allowed') === true)
+    @if ($isGuestRegistrationAllowed === true)
         <li class="nav-item">
             <a href="{{ route('register') }}" class="nav-link">新規登録</a>
         </li>

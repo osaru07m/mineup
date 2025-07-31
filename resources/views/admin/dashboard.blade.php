@@ -1,7 +1,3 @@
-<?php
-
-
-?>
 <x-layout title="ダッシュボード">
     <h2>ダッシュボード</h2>
     <div class="row g-2">
@@ -19,18 +15,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td scope="row">アクティブ</td>
-                                        <td>{{ number_format($userCount[User::STATUS_ACTIVE] ?? 0) }} 人</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">承認待ち</td>
-                                        <td>{{ number_format($userCount[User::STATUS_PENDING] ?? 0) }} 人</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">ロック済み</td>
-                                        <td>{{ number_format($userCount[User::STATUS_LOCKED] ?? 0) }} 人</td>
-                                    </tr>
+                                    @foreach ($userCounts as $userCount)
+                                        <tr>
+                                            <th scope="row">{{ $userCount['label'] }}</th>
+                                            <td>{{ number_format($userCount['count']) }} 名</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
