@@ -21,7 +21,7 @@ return new class () extends Migration {
             $table->string('last_name')->comment('姓');
             $table->string('status')->default('active')->comment('ステータス');
             $table->string('language')->default('auto')->comment('使用言語');
-            $table->boolean('is_password_change_required')->default(false)->comment('強制パスワード変更フラグ');
+            $table->boolean('is_change_password_required')->default(false)->comment('強制パスワード変更フラグ');
             $table->boolean('is_admin')->default(false)->comment('管理者フラグ');
             $table->rememberToken();
             $table->timestamps();

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
             'first_name' => '管理者',
             'last_name' => config('app.name'),
-            'is_password_change_required' => true,
+            'is_change_password_required' => true,
             'is_admin' => true
         ]);
     }

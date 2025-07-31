@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'project' => [
+        'source' => 'https://github.com/osaru07m/mineup'
+    ],
 ];

@@ -13,6 +13,10 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
 
+    /** @var string アクティブステータス */
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_LOCKED = 'locked';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,7 +54,7 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
             'is_admin' => 'boolean',
-            'is_password_change_required' => 'boolean',
+            'is_change_password_required' => 'boolean',
             'last_logged-in_at' => 'datetime',
         ];
     }
