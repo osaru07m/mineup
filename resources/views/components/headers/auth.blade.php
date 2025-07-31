@@ -7,6 +7,7 @@
             <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">管理</button>
             <ul class="dropdown-menu">
                 <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">ダッシュボード</a></li>
+                <li><a href="{{ route('admin.activities') }}" class="dropdown-item">アクティビティ</a></li>
             </ul>
         </li>
     @endif
