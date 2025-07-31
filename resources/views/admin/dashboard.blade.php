@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Users\User;
 
 ?>
 <x-layout title="ダッシュボード">

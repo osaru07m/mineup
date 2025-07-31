@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ApplicationSetting;
 
 ?>
 <ul class="navbar-nav ms-auto">
