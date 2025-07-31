@@ -18,6 +18,7 @@ Route::middleware(['auth', ForceChangePasswordRedirect::class, CheckStatus::clas
         Route::get('/', [SettingController::class, 'showForm'])->name('setting');
 
         Route::post('/info', [SettingController::class, 'updateInfo'])->name('setting.info');
+        Route::post('/auth', [SettingController::class, 'updateAuth'])->name('setting.auth');
     });
 
     Route::prefix('/admin')->as('admin.')->group(function () {
