@@ -10,7 +10,7 @@
             @csrf
             <div class="mb-3">
                 <label for="login" class="form-label">ログインID</label>
-                <input type="text" name="login" value="{{ old('login') }}" autocomplete="none" id="login" class="form-control @error('login') is-invalid @enderror">
+                <input type="text" name="login" value="{{ old('login') }}" autocomplete="off" id="login" class="form-control @error('login') is-invalid @enderror">
                 @error('login')
                     <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
@@ -24,7 +24,7 @@
             </div>
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">パスワード(確認用)</label>
-                <input type="password" name="password_confirmation" autocomplete="none" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+                <input type="password" name="password_confirmation" autocomplete="off" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
                 @error('password_confirmation')
                     <span class="invalid-feedback">{{ $message }}</span>
                 @enderror

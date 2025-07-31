@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangePasswordFormRequest;
 use App\Http\Requests\Auth\LoginFormRequest;
 use App\Models\Users\User;
+use App\Models\Users\UserActivity;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,18 @@ class AuthSessionController extends Controller
         $auth->password = Hash::make($newPassword);
         $auth->is_change_password_required = false;
         $auth->save();
+
+        UserActivity::create([
+            'user_id' => $auth->id,
+            'action' => 'changed_password',
+            'context' => [
+                'password' => [
+                    'after' => '=== SECRET ===',
+                    'before' => '=== SECRET ==='
+                ]
+            ],
+            'ip_address' => $request->ip()
+        ]);
 
         return redirect()->route('home');
     }

@@ -12,7 +12,7 @@
         </div>
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">新しいパスワード(確認用)</label>
-            <input type="password" name="password_confirmation" autocomplete="none" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+            <input type="password" name="password_confirmation" autocomplete="off" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
             @error('password_confirmation')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror

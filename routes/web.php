@@ -14,9 +14,11 @@ Route::middleware(['auth', ForceChangePasswordRedirect::class, CheckStatus::clas
         return view('home');
     })->name('home');
 
-    Route::get('/setting', [SettingController::class, 'showForm'])->name('setting');
-    Route::post('/setting/info', [SettingController::class, 'updateInfo'])->name('setting.info');
-    Route::post('/setting/options')->name('setting.options');
+    Route::prefix('/setting')->group(function () {
+        Route::get('/', [SettingController::class, 'showForm'])->name('setting');
+
+        Route::post('/info', [SettingController::class, 'updateInfo'])->name('setting.info');
+    });
 
     Route::prefix('/admin')->as('admin.')->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');

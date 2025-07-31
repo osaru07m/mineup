@@ -2,31 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Setting\AuthFormRequest;
 use App\Http\Requests\Setting\InfoFormRequest;
 use App\Models\Users\UserActivity;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
 {
     public function showForm(): View
     {
-        $user = Auth::guard('web')->user();
+        $auth = Auth::guard('web')->user();
 
-        return view('setting', compact('user'));
+        return view('setting', compact('auth'));
     }
 
     public function updateInfo(InfoFormRequest $request)
     {
-        $user = Auth::guard('web')->user();
+        $auth = Auth::guard('web')->user();
 
-        $beforeData = $user->only(['last_name', 'first_name', 'email', 'language']);
+        $beforeData = $auth->only(['last_name', 'first_name', 'email', 'language']);
         $afterData = $request->only(['last_name', 'first_name', 'email', 'language']);
 
         $diff = array_diff_assoc($afterData, $beforeData);
 
         if (!empty($diff)) {
-            $user->fill($afterData)->save();
+            $auth->fill($afterData)->save();
 
             $activityContext = [];
 
@@ -38,9 +40,33 @@ class SettingController extends Controller
             }
 
             UserActivity::create([
-                'user_id' => $user->id,
+                'user_id' => $auth->id,
                 'action' => 'update_info',
                 'context' => $activityContext,
+                'ip_address' => $request->ip()
+            ]);
+        }
+
+        return redirect()->route('setting');
+    }
+
+    public function updateAuth(AuthFormRequest $request)
+    {
+        $auth = Auth::guard('web')->user();
+
+        if ($request->filled('password')) {
+            $auth->password = Hash::make($request->password);
+            $auth->save();
+
+            UserActivity::create([
+                'user_id' => $auth->id,
+                'action' => 'changed_password',
+                'context' => [
+                    'password' => [
+                        'after' => '=== SECRET ===',
+                        'before' => '=== SECRET ==='
+                    ]
+                ],
                 'ip_address' => $request->ip()
             ]);
         }

@@ -24,6 +24,9 @@
                                 @case('login')
                                     ログイン
                                     @break
+                                @case('changed_password')
+                                    設定(認証) 更新
+                                    @break
                                 @case('update_info')
                                     設定(基本情報) 更新
                                     @break
