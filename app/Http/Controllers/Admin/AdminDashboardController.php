@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Users\User;
+use App\Models\Users\UserActivity;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,8 @@ class AdminDashboardController extends Controller
             ->groupBy('status')
             ->pluck('count', 'status');
 
-        return view('admin.dashboard', compact('userCount'));
+        $userActivities = UserActivity::with('user')->orderBy('created_at', 'desc')->limit(10)->get();
+
+        return view('admin.dashboard', compact('userCount', 'userActivities'));
     }
 }

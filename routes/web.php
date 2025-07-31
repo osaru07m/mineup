@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Middleware\Auth\CheckStatus;
 use App\Http\Middleware\Auth\ForceChangePasswordRedirect;
@@ -14,5 +15,7 @@ Route::middleware(['auth', ForceChangePasswordRedirect::class, CheckStatus::clas
 
     Route::prefix('/admin')->as('admin.')->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
     });
 });
