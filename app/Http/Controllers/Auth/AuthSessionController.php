@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangePasswordFormRequest;
 use App\Http\Requests\Auth\LoginFormRequest;
+use App\Models\Users\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,17 @@ class AuthSessionController extends Controller
 
         if (Auth::guard('web')->attempt($credentials, $remember)) {
             $auth = Auth::guard('web')->user();
+
+            if ($auth->status === User::STATUS_LOCKED) {
+                Auth::guard('web')->logout();
+
+                return back()->withErrors(['login' => 'アカウントがロックされています。'])->withInput();
+            } elseif ($auth->status === User::STATUS_PENDING) {
+                Auth::guard('web')->logout();
+
+                return back()->withErrors(['login' => 'アカウントが承認されていません。'])->withInput();
+            }
+
             $auth->last_logged_in_at = now();
             $auth->save();
 

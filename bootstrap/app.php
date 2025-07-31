@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Auth\CheckStatus;
 use App\Http\Middleware\Auth\ForceChangePasswordRedirect;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -12,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->append(CheckStatus::class);
         $middleware->append(ForceChangePasswordRedirect::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

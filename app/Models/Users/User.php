@@ -15,6 +15,9 @@ class User extends Authenticatable
 
     /** @var string アクティブステータス */
     public const STATUS_ACTIVE = 'active';
+    /** @var string 承認待ちステータス */
+    public const STATUS_PENDING = 'pending';
+    /** @var string ロック済みステータス */
     public const STATUS_LOCKED = 'locked';
 
     /**
