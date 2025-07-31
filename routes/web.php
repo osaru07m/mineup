@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Middleware\Auth\CheckStatus;
 use App\Http\Middleware\Auth\ForceChangePasswordRedirect;
 use Illuminate\Support\Facades\Route;
@@ -10,4 +11,8 @@ Route::middleware(['auth', ForceChangePasswordRedirect::class, CheckStatus::clas
     Route::get('/', function () {
         return view('home');
     })->name('home');
+
+    Route::prefix('/admin')->as('admin.')->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    });
 });
