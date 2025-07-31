@@ -24,6 +24,9 @@
                                 @case('login')
                                     ログイン
                                     @break
+                                @case('update_info')
+                                    設定(基本情報) 更新
+                                    @break
                                 @default
                                     不明
                             @endswitch

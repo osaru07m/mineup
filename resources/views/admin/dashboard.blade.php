@@ -45,7 +45,7 @@
                                 <tbody>
                                     @forelse ($userActivities as $userActivity)
                                         <tr>
-                                            <td>{{ $userActivity->created_at->format('Y年n月j日') }}</td>
+                                            <td>{{ $userActivity->created_at->format('Y年n月j日 H:i') }}</td>
                                             <td>
                                                 <span>{{ $userActivity->user->last_name }} {{ $userActivity->user->first_name }}</span>
                                                 <span class="text-muted">({{ $userActivity->user->login }})</span>
@@ -54,6 +54,9 @@
                                                 @switch($userActivity->action)
                                                     @case('login')
                                                         ログイン
+                                                        @break
+                                                    @case('update_info')
+                                                        設定(基本情報) 更新
                                                         @break
                                                     @default
                                                         不明
